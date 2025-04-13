@@ -8,7 +8,13 @@ function reload() {
 }
 
 async function fetchNews(query) {
-    const res = await fetch(`${url}${query}&apiKey=${API_KEY}`);
+    const res = await fetch(`${url}${query}`, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${API_KEY}`,
+            'Upgrade': 'HTTP/2.0' // If required by the API
+        }
+    });
     const data = await res.json();
     bindData(data.articles);
 }
